@@ -1,0 +1,14 @@
+.icard{
+    border-radius: 10px;
+    box-shadow: 0.2px 0.2px 5px darkcyan;
+    margin:30px auto;
+    width: 50%;
+    padding:17px;
+    overflow: auto;
+}
+
+@media screen and (max-width:450px){
+.icard{
+        width: 95%;
+    }
+}

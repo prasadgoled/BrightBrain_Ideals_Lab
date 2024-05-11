@@ -1,0 +1,37 @@
+.about{
+    width: 50%;
+    text-align: justify;
+    padding: 10px;
+    margin: 0 auto;
+}
+.socialgroup{
+    width: 50%;
+}
+.social{
+    font-size: 25px;
+    color: rgb(150, 143, 143);
+    transition: 0.3s;
+}
+
+.social:hover{
+    color: white;
+    transition: 0.35s;
+    
+}
+.contact{
+    border-radius: 10px;
+    box-shadow: 0.2px 0.2px 5px whitesmoke;
+    width: 50%;
+}
+
+@media screen and (max-width:450px){
+.contact{
+        width: 95%;
+    }
+.about{
+    width: 92%;
+}
+.socialgroup{
+    width: 95%;
+}
+}

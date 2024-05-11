@@ -1,0 +1,15 @@
+small{
+    color: red;
+}
+.scard{
+    border-radius: 10px;
+    box-shadow: 0.2px 0.2px 5px darkcyan;
+    margin:50px auto;
+    width: 25%;
+    padding:17px;
+}
+@media screen and (max-width:450px){
+.scard{
+        width: 95%;
+    }
+}
