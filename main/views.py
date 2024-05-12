@@ -38,7 +38,7 @@ def updateIdeaPage(request,id):
         else:
             pi = ideaDetails.objects.get(id=id)
             form=ideaForm(instance=data)
-        return render(request,'main/updateIdeas.html',{'form':form})
+        return render(request,'main/updateIdea.html',{'form':form})
     else:
         return HttpResponseRedirect('/main/loginpage/')
     
@@ -61,28 +61,38 @@ def dashboardPage(request):
         return HttpResponseRedirect('/main/loginpage/')
     
 def signupPage(request):
-    if request.method=='POST':
-        form=signupForm(request.POST)
+    if request.method == 'POST':
+        form = signupForm(request.POST)
         if form.is_valid():
-            messages.success(request,'Congratulations!! You have successfully created account')
-            form.save()
+            if form.cleaned_data.get('captcha'):
+                form.save()
+                messages.success(request, 'Congratulations! Your account has been successfully created')
+            else:
+                form.add_error('captcha', 'Invalid CAPTCHA. Please try again.')
+        else:
+            messages.error(request, 'Failed to create an account. Please check the form data.')
     else:
-        form=signupForm()
-    return render(request,'main/signup.html',{'form':form})
+        form = signupForm()
+    return render(request, 'main/signup.html', {'form': form})
+
 
 def loginPage(request):
     if not request.user.is_authenticated:
-        if request.method=='POST':
-            form=loginForm(request=request,data=request.POST)
+        if request.method == 'POST':
+            form = loginForm(request=request, data=request.POST)
             if form.is_valid():
-                uname=form.cleaned_data['username']
-                upass=form.cleaned_data['password']
-                user=authenticate(username=uname,password=upass)
+                uname = form.cleaned_data['username']
+                upass = form.cleaned_data['password']
+                user = authenticate(username=uname, password=upass)
                 if user:
-                    login(request,user)
+                    login(request, user)
+                    messages.success(request, 'Login successful. Welcome to the dashboard!')
                     return HttpResponseRedirect('/main/dashboardpage/')
-        form=loginForm()
-        return render(request,'main/login.html',{'form':form})
+                else:
+                    messages.error(request, 'Invalid username or password. Please try again.')
+        else:
+            form = loginForm()
+        return render(request, 'main/login.html', {'form': form})
     else:
         return HttpResponseRedirect('/main/dashboardpage/')
     

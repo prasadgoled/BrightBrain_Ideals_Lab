@@ -17,17 +17,37 @@
         <form action="" method="post" autocomplete="off">
             {% csrf_token %}
             {% for fm in form %}
-            <div class="my-1 text-center">
-                {{fm.label_tag}} 
-                {{fm}} 
+            <div class="form-group my-1 text-center">
+                {% if fm.errors %}
+                <small class="text-danger">{{ fm.errors|striptags }}</small>
+                {% endif %}
+                <div class="input-group">
+                            {% if fm.name == 'businessName' %}
+                            <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                            {% elif fm.name == 'businessLocation' %}
+                            <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                            {% elif fm.name == 'businessType' %}
+                            <span class="input-group-text"><i class="bi bi-building"></i></span>  
+                            {% elif fm.name == 'investmentAmount' %}
+                            <span class="input-group-text"><i class="bi bi-cash"></i></span>  
+                            {% elif fm.name == 'contractDuration' %}
+                            <span class="input-group-text"><i class="bi bi-calendar-check"></i></span>  
+                            {% elif fm.name == 'numberOfPeople' %}
+                            <span class="input-group-text"><i class="bi bi-people"></i></span>     
+                            {% elif fm.name == 'businessDescription' %}
+                            <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                            {% endif %}
+                    <label for="{{ fm.id_for_label }}" class="visually-hidden">{{ fm.label }}</label>
+                    {{ fm }}
+                </div>
             </div>
-            <small>{{fm.errors|striptags}}</small>
-            <br>
             {% endfor %}
-            <div class="text-center"><button class="btn btn-outline-primary mb-3" type="submit">Update</button></div>
+            <div class="text-center">
+                <button class="btn btn-outline-primary mb-3" type="submit">Update</button>
+            </div>
             {% if form.non_field_errors %}
             {% for error in form.non_field_errors %}
-            <p>{{error}}</p>
+            <p>{{ error }}</p>
             {% endfor %}
             {% endif %}
         </form>

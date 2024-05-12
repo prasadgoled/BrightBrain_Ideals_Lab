@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'BrightBrain_Ideas_Lab.wsgi.application'
+
+CAPTCHA_LENGTH = 5  # Set the length of the CAPTCHA
+CAPTCHA_FONT_SIZE = 30  # Set the font size of the CAPTCHA characters
 
 STATICFILES_DIRS = [STATIC_DIR]
 

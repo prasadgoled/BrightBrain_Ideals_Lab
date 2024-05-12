@@ -13,8 +13,9 @@
 <body>
     {% include 'main/navbar.html' %}
     <div class="main">
-        <marquee behavior="alternate" class="text-light bg-danger p-2 my-3 mx-auto">Some Features may not work, still Project is under Development</marquee>
+        <marquee behavior="alternate" class="text-light bg-danger p-2 my-3 mx-auto"><b>Contact</b> and <b>Contact us</b> Features may not work, still Project is under Development</marquee>
         <h3 class="mt-3 text-center">Following are the Business Ideas Posted by Our BrightBrains</h3>
+        <a href="{% url 'addideapage' %}"><button class="btn btn-primary ms-3" type="button">Add Your Ideas</button></a>
         {% for idea in ideas %}
         <div class="content bg-light">
             <h2>{{idea.businessName}}</h2>

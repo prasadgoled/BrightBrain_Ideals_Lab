@@ -20,5 +20,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.indexPage,name='indexPage'),
-    path('main/',include('main.urls'))
+    path('main/',include('main.urls')),
+    path('captcha/', include('captcha.urls'))
 ]
